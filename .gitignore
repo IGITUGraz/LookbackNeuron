@@ -1,1 +1,7 @@
 /.idea
+/**/CMakeCache.txt
+/**/CMakeFiles
+/**/cmake_install.cmake
+/**/enable_nest_lookback.sh
+/**/liblookbackmodule.so
+/**/Makefile
