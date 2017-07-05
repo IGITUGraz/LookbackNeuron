@@ -39,12 +39,14 @@ set( MODULE_NAME ${SHORT_NAME}module )
 
 # 2) Add all your sources here
 set( MODULE_SOURCES
-    lookback_connector_model.h lookback_connector_model_impl.h
-    lookback_exceptions.h lookback_exceptions.cpp
-    lookback_node.h)
+     lookback_exceptions.cpp)
 
 # 3) We require a header name like this:
-set( MODULE_HEADER ${MODULE_NAME}.h )
+set( MODULE_HEADERS 
+     lookback_connector_model.h
+     lookback_connector_model_impl.h
+     lookback_exceptions.h
+     lookback_node.h )
 # containing the class description of the class extending the SLIModule
 
 # 4) Specify your module version
@@ -185,6 +187,11 @@ execute_process(
 # on OS X
 set( CMAKE_MACOSX_RPATH ON )
 
+# Install all stuff to NEST's install directories.
+set( CMAKE_INSTALL_LIBDIR ${NEST_LIBDIR}/nest CACHE STRING "object code libraries (lib/nest or lib64/nest or lib/<multiarch-tuple>/nest on Debian)" FORCE )
+set( CMAKE_INSTALL_DOCDIR ${NEST_DOCDIR} CACHE STRING "documentation root (DATAROOTDIR/doc/nest)" FORCE )
+set( CMAKE_INSTALL_DATADIR ${NEST_DATADIR} CACHE STRING "read-only architecture-independent data (DATAROOTDIR/nest)" FORCE )
+
 include( GNUInstallDirs )
 
 # When building shared libraries, also create a module for loading at runtime
@@ -203,4 +210,5 @@ separate_arguments(NEST_LIBS)
 target_link_libraries(${MODULE_NAME} ${NEST_LIBS})
 target_link_libraries(${MODULE_NAME} -Wl,--no-undefined)
 
-configure_file(enable_nest_lookback.sh.in enable_nest_lookback.sh @ONLY)
+install( TARGETS ${MODULE_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR} )
+install( FILES ${MODULE_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} )
