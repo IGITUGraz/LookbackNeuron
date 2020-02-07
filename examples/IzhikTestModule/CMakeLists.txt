@@ -135,6 +135,9 @@ if ( NEST_INCLUDES )
   endforeach ()
 endif ()
 
+# Include the include directory in nest so that the lookback header files can be imported
+include_directories( "${CMAKE_INSTALL_PREFIX}/include" )
+
 # Get, if NEST is build as a (mostly) static application. If yes, also only build
 # static library.
 execute_process(
