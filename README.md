@@ -8,6 +8,11 @@
     ```
     ./install.sh
     ```
+    
+    Note that this has only been tested to work upto nest version 2.12.0
+    Nest after this version appears to have changes to the connection
+    structure making the current code non-functional.
+    (Sorry! I haven't found the time to fix this)
 
 ##  How to use?
 
